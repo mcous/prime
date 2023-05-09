@@ -6,7 +6,7 @@ on:
       - main
   push:
     branches:
-      - main
+      - simplify-ci-deploy-test
 
 jobs:
   check:
@@ -57,7 +57,7 @@ jobs:
           retention-days: 30
 
   deploy-npm:
-    if: ${{ github.repository == 'viamrobotics/prime' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    if: ${{ github.repository == 'mcous/viamrobotics-prime' && github.event_name == 'push' && github.ref == 'refs/heads/simplify-ci-deploy-test' }}
     needs: [check, build, test]
     runs-on: ubuntu-latest
     steps:
@@ -71,13 +71,16 @@ jobs:
         with:
           name: npm-dist
           path: dist
-      - name: Publish 🚀
-        uses: JS-DevTools/npm-publish@541aa6b21b4a1e9990c95a92c21adc16b35e9551
-        with:
-          token: ${{ secrets.NPM_TOKEN }}
+      # - name: Publish 🚀
+      #   uses: JS-DevTools/npm-publish@541aa6b21b4a1e9990c95a92c21adc16b35e9551
+      #   with:
+      #     token: ${{ secrets.NPM_TOKEN }}
+      #     dry-run: true
+      - name: Fake publish
+        run: npm pack
 
   deploy-pages:
-    if: ${{ github.repository == 'viamrobotics/prime' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    if: ${{ github.repository == 'mcous/viamrobotics-prime' && github.event_name == 'push' && github.ref == 'refs/heads/simplify-ci-deploy-test' }}
     needs: [check, build, test]
     runs-on: ubuntu-latest
     permissions:
