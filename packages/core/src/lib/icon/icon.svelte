@@ -1,11 +1,11 @@
 <!--
 @component
-  
+
 A component that renders SVG icons from the @mdi/js package
 ```svelte
   <Icon
     name='camera-outline'
-    size='xl' 
+    size='xl'
   />
 ```
 -->
@@ -46,7 +46,7 @@ const sizes: Record<Size, string> = {
 -->
 <svg
   class={cx(sizes[size], {
-    'inline-block': hasNameProperty,
+    'inline-block leading-none': hasNameProperty,
     hidden: !hasNameProperty,
   })}
   viewBox="0 0 24 24"

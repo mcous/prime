@@ -25,7 +25,7 @@ const hasNameProperty = Object.hasOwn(paths, name);
 
 <svg
   class={cx(sizes[size], {
-    'inline-block': hasNameProperty,
+    'inline-block leading-none': hasNameProperty,
     hidden: !hasNameProperty,
   })}
   viewBox="0 0 24 24"
