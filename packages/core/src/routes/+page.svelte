@@ -702,7 +702,7 @@ const htmlSnippet = `
     <FloatingMenu
       isOpen={floatingMenuOpen}
       placement="right-start"
-      offset={4}
+      offset={{ mainAxis: 4, crossAxis: -6 }}
       onChange={handleFloatingMenuChange}
     >
       <svelte:fragment slot="control">

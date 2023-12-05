@@ -71,7 +71,12 @@ const createContext = (): TooltipContext => {
       $visibility === 'visible' ||
       Boolean($visibility === undefined && $isHovered)
   );
-  const style = floatingStyle({ offset: 7, shift: 5, flip: true, auto: true });
+  const style = floatingStyle({
+    offset: 7,
+    shift: { padding: 5 },
+    flip: true,
+    auto: true,
+  });
 
   return {
     id,

@@ -7,9 +7,11 @@ export { clickOutside } from './click-outside';
 export { default as CodeSnippet } from './code-snippet.svelte';
 
 export {
+  contextMenuItemCx,
   ContextMenu,
   ContextMenuItem,
   ContextMenuSeparator,
+  MenuControl,
   FloatingMenu,
   type ContextMenuItemVariant,
 } from './context-menu';
@@ -17,8 +19,10 @@ export {
 export {
   floatingStyle,
   Floating,
+  type FloatingOffsetOptions,
   type FloatingPlacement,
   type FloatingReferenceElement,
+  type FloatingShiftOptions,
   type FloatingStyleStore,
   type FloatingStyle,
 } from './floating';

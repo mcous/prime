@@ -13,7 +13,7 @@ import cx from 'classnames';
 import Icon from '$lib/icon/icon.svelte';
 import type { IconName } from '$lib/icon/icons';
 
-import type { ContextMenuItemVariant } from './variants';
+import { contextMenuItemCx, type ContextMenuItemVariant } from './style';
 
 /**
  * Optional icon name shown in the item.
@@ -30,29 +30,15 @@ export { extraClasses as cx };
 
 <button
   role="menuitem"
-  class={cx(
-    'flex w-full items-center gap-1.5 px-3 py-1.5 text-left hover:bg-light',
-    extraClasses
-  )}
+  class={cx(contextMenuItemCx(variant), extraClasses)}
   on:click
 >
   {#if icon}
-    <div
-      class={cx({
-        'text-gray-400': variant === 'primary',
-        'text-danger-dark': variant === 'danger',
-      })}
-    >
-      <Icon name={icon} />
-    </div>
+    <Icon
+      name={icon}
+      cx={{ 'text-gray-6': variant === 'primary' }}
+    />
   {/if}
 
-  <p
-    class={cx('text-sm', {
-      'text-default': variant === 'primary',
-      'text-danger-dark': variant === 'danger',
-    })}
-  >
-    <slot />
-  </p>
+  <slot />
 </button>

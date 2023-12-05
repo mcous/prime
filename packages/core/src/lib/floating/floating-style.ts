@@ -10,6 +10,8 @@ import {
   type Side,
   type ComputePositionConfig,
   type ReferenceElement,
+  type OffsetOptions,
+  type ShiftOptions,
 } from '@floating-ui/dom';
 
 import { derived, writable, type Readable } from 'svelte/store';
@@ -18,6 +20,8 @@ import noop from 'lodash/noop';
 export type {
   Placement as FloatingPlacement,
   ReferenceElement as FloatingReferenceElement,
+  OffsetOptions as FloatingOffsetOptions,
+  ShiftOptions as FloatingShiftOptions,
 } from '@floating-ui/dom';
 
 export interface FloatingStyleStore
@@ -43,9 +47,9 @@ export interface State {
   floatingElement?: HTMLElement | undefined;
   arrowElement?: Element | undefined;
   placement?: Placement;
-  offset?: number;
+  offset?: OffsetOptions | undefined;
   flip?: boolean;
-  shift?: number;
+  shift?: ShiftOptions | undefined;
   auto?: boolean;
 }
 
@@ -120,7 +124,7 @@ const getConfig = (state: State): ComputePositionConfig => {
           fallbackAxisSideDirection: 'start',
           crossAxis: shift === undefined,
         }),
-      shift !== undefined && shiftMiddleware({ padding: shift }),
+      shift !== undefined && shiftMiddleware(shift),
       arrowElement && arrowMiddleware({ element: arrowElement }),
     ],
   };

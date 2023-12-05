@@ -65,6 +65,7 @@ export const paths = {
   logout: MDI.mdiLogout,
   magnify: MDI.mdiMagnify,
   menu: MDI.mdiMenu,
+  'menu-right': MDI.mdiMenuRight,
   minus: MDI.mdiMinus,
   'navigation-variant-outline': MDI.mdiNavigationVariantOutline,
   'navigation-variant': MDI.mdiNavigationVariant,

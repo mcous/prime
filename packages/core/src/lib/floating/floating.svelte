@@ -5,12 +5,15 @@ import {
   floatingStyle,
   type FloatingReferenceElement,
   type FloatingPlacement,
+  type FloatingOffsetOptions,
+  type FloatingShiftOptions,
 } from './floating-style';
 
 export { className as cx };
-export let referenceElement: FloatingReferenceElement;
+export let referenceElement: FloatingReferenceElement | undefined;
 export let placement: FloatingPlacement = 'bottom-start';
-export let offset = 0;
+export let offset: FloatingOffsetOptions | undefined = undefined;
+export let shift: FloatingShiftOptions | undefined = undefined;
 export let onClickOutside: ((target: Element) => unknown) | undefined =
   undefined;
 
@@ -18,7 +21,13 @@ const style = floatingStyle();
 let floatingElement: HTMLElement | undefined;
 let className: cx.Argument = undefined;
 
-$: style.register({ referenceElement, floatingElement, placement, offset });
+$: style.register({
+  referenceElement,
+  floatingElement,
+  placement,
+  offset,
+  shift,
+});
 </script>
 
 <div

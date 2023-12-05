@@ -1,16 +1,23 @@
 <script lang="ts">
-import cx from 'classnames';
+import type { Argument as CXArgument } from 'classnames';
 import { uniqueId } from '$lib/unique-id';
-import { Floating, type FloatingPlacement } from '$lib/floating';
+import {
+  Floating,
+  type FloatingPlacement,
+  type FloatingOffsetOptions,
+} from '$lib/floating';
+
+import MenuControl from './menu-control.svelte';
 import ContextMenu from './context-menu.svelte';
 
 export let isOpen: boolean;
 export let label: string | undefined = undefined;
+export let role: string | undefined = undefined;
 export let describedBy: string | undefined = undefined;
 export let placement: FloatingPlacement = 'bottom-start';
-export let offset = 0;
-export let buttonCX: cx.Argument = '';
-export let menuCX: cx.Argument = '';
+export let offset: FloatingOffsetOptions | undefined = undefined;
+export let buttonCX: CXArgument = '';
+export let menuCX: CXArgument = '';
 export let onChange: (isOpen: boolean) => unknown;
 
 const buttonID = uniqueId('floating-menu-control');
@@ -36,19 +43,19 @@ const handleEscape = (event: KeyboardEvent) => {
 
 <svelte:window on:keydown={isOpen ? handleEscape : undefined} />
 
-<button
+<MenuControl
+  {role}
+  {menuID}
+  {isOpen}
+  {label}
+  {describedBy}
   id={buttonID}
-  class={cx(buttonCX)}
-  aria-haspopup="menu"
-  aria-controls={menuID}
-  aria-expanded={isOpen}
-  aria-label={label}
-  aria-describedby={describedBy}
+  cx={buttonCX}
   on:click={isOpen ? closeMenu : openMenu}
-  bind:this={referenceElement}
+  bind:element={referenceElement}
 >
   <slot name="control" />
-</button>
+</MenuControl>
 
 {#if isOpen}
   <Floating
